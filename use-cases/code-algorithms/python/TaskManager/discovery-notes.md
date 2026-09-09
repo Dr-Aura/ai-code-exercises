@@ -91,3 +91,53 @@ Run the CLI locally: create a task with a past due date, list with --overdue, ma
 - Am I duplicating stringification logic that already exists in TaskEncoder/format_task?
 - Is storage.py staying JSON-only, or am I tempted to cram CSV logic in there?
 - Does the new CLI subcommand match the existing argparse pattern exactly?
+
+## Exercise Part 3: Understanding Domain Model
+
+### Step 1: Domain model extraction
+Core entities (from models.py): Task, TaskStatus (enum), TaskPriority (enum)
+
+Business logic found in task_priority.py (NOT wired into cli.py - undiscovered feature):
+- calculate_task_score(): computes an 'importance score' distinct from raw TaskPriority
+- Formula: priority_weight*10, +due-date urgency bonus, -status penalty (DONE/REVIEW),
+  +tag bonus (blocker/critical/urgent), +recency bonus (updated <1 day ago)
+- sort_tasks_by_importance() and get_top_priority_tasks() build on the score
+
+Domain-specific terminology noted:
+- 'Priority' (raw enum, static) vs 'Importance score' (computed, dynamic) - these are DIFFERENT concepts
+- 'Overdue' has a precise definition: due_date < now AND status != DONE (from is_overdue())
+
+### Step 2: Entity relationship sketch
+```
+Task --has-a--> TaskPriority (enum, static, user-editable)
+Task --has-a--> TaskStatus (enum, changes via workflow)
+calculate_task_score(Task) --reads--> Task, --produces--> importance score (computed, not stored)
+```
+
+My initial understanding:
+- Task is the single core entity - everything else (TaskStatus, TaskPriority) describes it
+- TaskPriority is set by the user and rarely changes; TaskStatus changes as work progresses
+- Importance score is a SEPARATE, derived concept from priority - confusingly similar name
+
+Questions/confusion:
+- Why is calculate_task_score() not exposed anywhere in cli.py? Intentional, in-progress, or dead code?
+- Is 'importance score' meant to eventually replace manual priority, or supplement it?
+
+### Step 3: Applied Domain Understanding Prompt - Q&A
+1. URGENT/no-due/stale=60 vs LOW/overdue/blocker=53 - URGENT wins but margin is close,
+   proving score is a genuine multi-factor trade-off, not priority-always-wins
+2. Subtracting (not excluding) DONE/REVIEW keeps them visible in a unified ranked view,
+   suggesting the score powers an all-tasks dashboard, not a strict active-only filter
+3. Solves 'what to work on today' - static priority goes stale, score reacts to time passing
+
+### Step 4: Glossary
+- Priority: static, user-assigned enum (LOW/MEDIUM/HIGH/URGENT) - input, rarely changes
+- Status: workflow state (TODO/IN_PROGRESS/REVIEW/DONE) - changes as work progresses
+- Importance score: computed, dynamic ranking combining priority + due date + status + tags + recency
+- Overdue: due_date in the past AND status != DONE (precise definition from is_overdue())
+- Blocker tags: 'blocker'/'critical'/'urgent' tags that boost importance score by +8
+
+### Revised understanding after Q&A
+Confirmed: priority (input) and importance score (output) are distinct layers.
+Score likely powers a not-yet-built 'smart view' feature - worth raising with the team
+as an open question rather than assuming it's dead code.
