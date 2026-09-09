@@ -141,3 +141,29 @@ Questions/confusion:
 Confirmed: priority (input) and importance score (output) are distinct layers.
 Score likely powers a not-yet-built 'smart view' feature - worth raising with the team
 as an open question rather than assuming it's dead code.
+
+### Reflection
+- AI prompts helped most by forcing me to state assumptions BEFORE getting answers - this caught wrong guesses early, e.g. task_manager.py being 'core logic' vs actually a thin coordinator
+- Still unsure about: whether task_parser.py and task_list_merge.py are dead code, in-progress features, or used by something outside cli.py entirely
+- Next step to deepen understanding: read task_parser.py and task_list_merge.py directly, and check the tests/ folder to see if they're exercised there
+
+## Exercise Part 4: Practical Application
+### Scenario: Auto-mark tasks 'abandoned' if overdue >7 days, unless high priority
+
+### Planning
+Files to modify:
+1. models.py - add TaskStatus.ABANDONED enum value
+2. task_manager.py - new apply_abandonment_rule() method (coordination layer role)
+3. storage.py - untouched, reuses get_all_tasks()/update_task()
+4. cli.py - decision needed: auto-run vs explicit subcommand
+
+Questions for the team:
+1. Does 'high priority' mean only HIGH, or HIGH+URGENT?
+2. Should the rule auto-run on every CLI call, or need an explicit command?
+3. Is 'abandoned' terminal, or reversible if due date changes?
+4. Does the existing naive datetime.now() (no timezone) matter for this rule?
+
+### Final Discussion and Reflection
+- Most helpful prompt: the Domain Understanding prompt (Part 3) - the quiz-style follow-up questions caught assumptions I hadn't tested, e.g. assuming priority always dominates the importance score, which turned out to be false
+- Next time: read the full call chain before forming file-by-file guesses, rather than guessing purpose from filenames alone - would catch orphaned files earlier
+- Complementary tools: actually running the code/tests to verify AI explanations, and a static call-graph tool to confirm which functions are truly unreferenced
