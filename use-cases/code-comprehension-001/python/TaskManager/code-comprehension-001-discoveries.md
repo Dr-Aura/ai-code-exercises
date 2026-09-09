@@ -116,3 +116,21 @@ update_task_status() looks like a generic status-transition function but has a h
 bypasses the generic Task.update() path entirely because generic update() cannot set completed_at.
 Risk: a future new status requiring its own side effect (e.g. ABANDONED needing an abandoned_at timestamp)
 could easily be added without realizing it needs the same special-case treatment.
+
+## Exercise Part 2: Deepen Understanding Through Guided Questions
+
+### Initial understanding (task priority system)
+- TaskPriority: enum, 4 fixed levels (LOW/MEDIUM/HIGH/URGENT), mapped to ints 1-4
+- Set once at creation (defaults to MEDIUM), changeable via update_task_priority - always a direct user choice, never computed
+- Used 3 ways: filter in list_tasks, display symbol in CLI, count in get_statistics - always read as-is, never reinterpreted
+- Verified finding: no computed importance-score system exists in this version - confirmed via grep, no task_priority.py, no score/optimiz mentions anywhere
+
+### Guided questions - answers and insights
+1. Priority update stays generic because it has no side effect (unlike DONE, which must also stamp completed_at)
+2. task_manager.update_task_priority() validates via TaskPriority(value), raising ValueError on bad input - BUT storage.get_tasks_by_priority() has zero validation itself; a raw int bypassing task_manager would silently match nothing (Enum != int) rather than error
+3. task_manager.py is the validation boundary (converts raw int input to enums); models.py trusts its caller completely and never validates - classic validate-at-the-edge pattern, but leaves models.py unprotected if ever called directly
+
+### Misconceptions clarified
+Initially assumed priority handling was "simpler" than status handling since it lacked a special DONE-style branch.
+Deeper look showed it's not simpler, just different: priority's validation happens earlier (at conversion) rather than
+via a special branch - and this exposed a real gap (storage.py's silent failure on invalid direct input) that a surface read would have missed
