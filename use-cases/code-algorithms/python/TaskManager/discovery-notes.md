@@ -53,3 +53,41 @@ task_parser.py, task_priority.py, and task_list_merge.py are NOT in the main cal
 
 ## Exploration exercise to verify understanding
 Run the CLI locally: create a task with a past due date, list with --overdue, mark it done, and confirm it drops off the overdue list. This validates the create -> storage -> is_overdue -> status update flow end to end.
+
+## Exercise Part 2: Finding Feature Implementation
+### Task: Add 'Task Export to CSV' feature
+
+### Step 1: Initial search results
+- grep for 'export': no matches anywhere in codebase
+- grep for 'csv': no matches anywhere in codebase
+- grep for 'open(': only storage.py (lines 52, 62) - sole file I/O in the project
+
+### Step 2: Hypothesis
+- No existing export functionality - this is a genuinely new feature, not extending something
+- Closest reusable pattern: storage.py already handles reading/writing all tasks, and has a
+  TaskEncoder that knows how to flatten Task objects (enums to values, datetimes to strings)
+- Likely home: new method in storage.py (e.g. export_to_csv()), OR a new standalone
+  module (e.g. task_exporter.py) if we want export logic decoupled from persistence
+- Would need a new CLI subcommand in cli.py, following the existing argparse subparser pattern
+- task_manager.py would likely need a thin new method (export_tasks()) to match its role
+  as coordinator, delegating to storage.py or the new exporter module
+
+### Step 3: Applied Feature Location Prompt - AI response summary
+- Better search terms suggested: write, to_dict/to_json/serialize, format_task
+- Recommendation: new module task_exporter.py (not storage.py) to keep persistence vs export separate
+- task_manager.py gets thin export_tasks() coordinator method, matching its existing role
+- cli.py gets new 'export' subcommand following existing subparser pattern
+- storage.py/models.py stay untouched - only read from, via get_all_tasks()
+
+### Step 4: Implementation plan
+1. Review format_task() in cli.py for which fields are user-facing (CSV column list)
+2. Reuse TaskEncoder logic from storage.py for stringifying enums/datetimes
+3. Create task_exporter.py with export_to_csv(tasks, filepath) using stdlib csv module
+4. Add task_manager.export_tasks(filepath, filters) reusing list_tasks() filter logic
+5. Add 'export' subcommand to cli.py
+6. Write test_task_exporter.py following existing tests/ pattern
+
+### Self-check questions
+- Am I duplicating stringification logic that already exists in TaskEncoder/format_task?
+- Is storage.py staying JSON-only, or am I tempted to cram CSV logic in there?
+- Does the new CLI subcommand match the existing argparse pattern exactly?
