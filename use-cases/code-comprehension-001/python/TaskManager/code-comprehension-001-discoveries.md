@@ -134,3 +134,38 @@ could easily be added without realizing it needs the same special-case treatment
 Initially assumed priority handling was "simpler" than status handling since it lacked a special DONE-style branch.
 Deeper look showed it's not simpler, just different: priority's validation happens earlier (at conversion) rather than
 via a special branch - and this exposed a real gap (storage.py's silent failure on invalid direct input) that a surface read would have missed
+
+## Exercise Part 3: Mapping Data Flow (Task Completion)
+
+### Data flow diagram
+```
+cli.py (status <id> done)
+  -> task_manager.update_task_status() -> TaskStatus('done') conversion -> DONE branch
+  -> storage.get_task(id) -> dict lookup
+  -> models.Task.mark_as_done() -> sets status=DONE, completed_at=now(), updated_at=completed_at
+  -> storage.save() -> full tasks.json rewrite -> errors caught+printed, NEVER raised/returned
+  -> update_task_status() returns True UNCONDITIONALLY, regardless of save() success
+```
+
+### State changes during completion
+1. task.status: previous value -> TaskStatus.DONE
+2. task.completed_at: None -> datetime.now()
+3. task.updated_at: set equal to completed_at (not a fresh datetime.now() call)
+All three changes happen on the in-memory object BEFORE storage.save() is even called
+
+
+### Potential points of failure (real finding)
+MAJOR: storage.save() catches all exceptions internally and only prints them - it never returns
+False or raises. update_task_status() calls save() and returns True unconditionally afterward,
+meaning the CLI reports success even if the write to disk actually failed (disk full, permissions,
+etc). The in-memory change exists but is lost when the process exits. This is a real data-loss risk.
+
+Secondary: no file locking - concurrent CLI runs race on the full read-load-rewrite cycle, last write wins
+Secondary: get_task() not-found returns None (not False) on this path - inconsistent with generic update path (noted in Part 1)
+Secondary: completed_at uses naive datetime.now() - no timezone handling (same issue as is_overdue(), noted earlier)
+
+### Persistence mechanism
+Not incremental - the ENTIRE task collection is serialized and rewritten to tasks.json on every single
+change, including marking one task done. TaskEncoder converts the enum and datetime fields to JSON-safe
+values (enum.value, datetime.isoformat()) during this rewrite.
+
