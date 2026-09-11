@@ -65,6 +65,18 @@ Covers:
 - Genuine bug found: email-uniqueness check runs before lowercasing, so a different-case duplicate email bypasses the check
 - Prompt 2: OpenAPI 3.0 conversion
 - Prompt 3: developer usage guide with a working Python example
+
+### 6. README and User Guide Documentation Exercise
+**Location:** `use-cases/code-algorithms/python/TaskManager/`
+**Journal:** [readme-user-guide-exercise.md](use-cases/code-algorithms/python/TaskManager/readme-user-guide-exercise.md)
+
+Project documented: The Task Manager CLI itself
+
+Covers:
+- Genuine bug found: the project's existing README documents command names that don't match the actual code (`update-status` vs. real `status`, etc.) - every example in the shipped README would fail as written
+- Prompt 1: corrected README.md
+- Prompt 2: step-by-step beginner guide for creating/completing a task
+- Prompt 3: FAQ grounded in prior exercises' verified findings (silent save failures, merge deletion gap, priority vs. importance score)
 ---
 
 ## Still to Come
