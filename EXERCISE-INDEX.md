@@ -22,12 +22,13 @@ Parts completed:
 ### 2. Codebase Exploration Challenge
 **Location:** `use-cases/code-comprehension-001/python/TaskManager/`
 **Discovery journal:** [code-comprehension-001-discoveries.md](use-cases/code-comprehension-001/python/TaskManager/code-comprehension-001-discoveries.md)
+**Presentation (PPTX):** [codebase-exploration-reflection.pptx](use-cases/code-comprehension-001/python/TaskManager/codebase-exploration-reflection.pptx)
 
-Parts completed:
+Parts completed (all 4 — exercise complete):
 - Part 1: Understanding a Specific Feature (task creation and status updates)
 - Part 2: Deepen Understanding Through Guided Questions (task priority)
 - Part 3: Mapping Data Flow (task completion)
-
+- Part 4: Reflection and Presentation
 ---
 
 ## Still to Come
