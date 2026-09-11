@@ -169,3 +169,9 @@ Not incremental - the ENTIRE task collection is serialized and rewritten to task
 change, including marking one task done. TaskEncoder converts the enum and datetime fields to JSON-safe
 values (enum.value, datetime.isoformat()) during this rewrite.
 
+
+## Exercise Part 4: Reflection and Presentation
+Consolidated Parts 1-3 into a 7-slide presentation (3-5 min) covering: architecture overview,
+all three features (creation/prioritization/completion), the DONE special-case design pattern,
+the storage.save() silent-failure challenge, and which prompt strategy suited which kind of understanding.
+File: codebase-exploration-reflection.pptx (added to repo alongside this journal)
