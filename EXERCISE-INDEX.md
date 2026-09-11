@@ -41,6 +41,18 @@ Covers:
 - Control flow diagram
 - Major finding: deleted tasks get silently resurrected on merge (no tombstone/deletion tracking)
 - Reflection questions
+
+### 4. Code Documentation Exercise
+**Location:** `use-cases/code-algorithms/python/TaskManager/`
+**Journal:** [code-documentation-exercise.md](use-cases/code-algorithms/python/TaskManager/code-documentation-exercise.md)
+
+Code documented: `merge_task_lists()` and `resolve_task_conflict()` (task list merging)
+
+Covers:
+- Prompt 1 output: full structural documentation (params, returns, exceptions, example)
+- Prompt 2 output: intent/logic explanation, assumptions, suggested inline comments
+- Comparison: Prompt 1 alone would have shipped accurate-but-shallow docs; Prompt 2 surfaced the hidden local-wins-by-default behavior and deletion gap
+- Final combined documentation version
 ---
 
 ## Still to Come
