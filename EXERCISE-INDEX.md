@@ -53,6 +53,18 @@ Covers:
 - Prompt 2 output: intent/logic explanation, assumptions, suggested inline comments
 - Comparison: Prompt 1 alone would have shipped accurate-but-shallow docs; Prompt 2 surfaced the hidden local-wins-by-default behavior and deletion gap
 - Final combined documentation version
+
+### 5. API Documentation Exercise
+**Location:** `use-cases/code-algorithms/python/TaskManager/`
+**Journal:** [api-documentation-exercise.md](use-cases/code-algorithms/python/TaskManager/api-documentation-exercise.md)
+
+Endpoint documented: POST /api/users/register (Flask starter example)
+
+Covers:
+- Prompt 1: full endpoint documentation (params, responses, error codes)
+- Genuine bug found: email-uniqueness check runs before lowercasing, so a different-case duplicate email bypasses the check
+- Prompt 2: OpenAPI 3.0 conversion
+- Prompt 3: developer usage guide with a working Python example
 ---
 
 ## Still to Come
