@@ -29,6 +29,18 @@ Parts completed (all 4 — exercise complete):
 - Part 2: Deepen Understanding Through Guided Questions (task priority)
 - Part 3: Mapping Data Flow (task completion)
 - Part 4: Reflection and Presentation
+
+### 3. Algorithm Deconstruction Challenge
+**Location:** `use-cases/code-algorithms/python/TaskManager/`
+**Journal:** [algorithm-deconstruction-journal.md](use-cases/code-algorithms/python/TaskManager/algorithm-deconstruction-journal.md)
+
+Algorithm chosen: Task list merging (two-way sync conflict resolution)
+
+Covers:
+- Step-by-step breakdown with a worked example
+- Control flow diagram
+- Major finding: deleted tasks get silently resurrected on merge (no tombstone/deletion tracking)
+- Reflection questions
 ---
 
 ## Still to Come
