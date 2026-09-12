@@ -76,7 +76,19 @@ Covers:
 - Genuine bug found: the project's existing README documents command names that don't match the actual code (`update-status` vs. real `status`, etc.) - every example in the shipped README would fail as written
 - Prompt 1: corrected README.md
 - Prompt 2: step-by-step beginner guide for creating/completing a task
-- Prompt 3: FAQ grounded in prior exercises' verified findings (silent save failures, merge deletion gap, priority vs. importance score)
+- Prompt 3: FAQ grounded in prior exercises' verified findings (silent save failures, merge 
+deletion gap, priority vs. importance score)
+
+### 7. Error Diagnosis Challenge
+**Location:** `use-cases/error-diagnosis-challenge/`
+**Journal:** [error-diagnosis-journal.md](use-cases/error-diagnosis-challenge/error-diagnosis-journal.md)
+
+Scenario chosen: Global Variable Being Overwritten (JavaScript) - variable shadowing bug
+
+Covers:
+- Root cause tracing: distinguished the crash's proximate cause (displayTasks running before initialization) from the actual logic bug (let shadowing preventing real task additions)
+- Fix and initialization guard
+- Reflection on JS scoping concepts (function-level shadowing)
 ---
 
 ## Still to Come
