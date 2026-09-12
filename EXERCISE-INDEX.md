@@ -129,6 +129,19 @@ Covers:
 - 3.2: Investigated a described bug that didn't apply to this Python implementation; found the real timedelta quirk from 2.2 also exists here but doesn't change the outcome
 - 4.1: Integration tests confirming the full scoring→sorting→top-N workflow, including a DONE/URGENT task correctly losing to active tasks
 - 18 tests total, all passing, zero regressions
+
+### 11. Understanding What to Change with AI
+**Location:** `use-cases/refactoring-what-to-change-exercise/`
+**Journal:** [refactoring-exercise-journal.md](use-cases/refactoring-what-to-change-exercise/refactoring-exercise-journal.md)
+
+All 3 parts complete: Code Readability (Java), Function Refactoring (Python),
+Code Duplication Detection (JavaScript)
+
+Covers:
+- Java UserMgr: renamed for clarity, but the real finding was a SQL injection vulnerability surfaced while reading closely enough to rename things
+- Python process_orders: decomposed into 3 focused functions; surfaced an implicit, undocumented "free shipping over $50" business rule
+- JavaScript calculateUserStatistics: consolidated 6 near-identical loops into 2 generic helpers + a data-driven loop
+- Reflection on when to disagree with AI suggestions (readability vs. team experience level trade-offs) and safeguards before applying refactors to production code
 ---
 
 ## Still to Come
