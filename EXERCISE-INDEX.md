@@ -167,6 +167,19 @@ Covers:
 - Deliberately kept loop counters unrenamed (used purely as indices) - clarity has a ceiling
 - Adapted and re-ran the test suite against the refactored version - all 3 tests passed, confirming behavior preservation
 - Reflection on which renames matter most (return-value keys, since they're the actual public contract)
+
+### 14. Design Pattern Implementation Challenge
+**Location:** `use-cases/design-pattern-implementation-challenge/`
+**Journal:** [pattern-challenge-journal.md](use-cases/design-pattern-implementation-challenge/pattern-challenge-journal.md)
+
+Pattern chosen: Strategy Pattern - JavaScript shipping cost calculator
+
+Covers:
+- Identified 3 parallel conditional blocks as interchangeable pricing algorithms sharing one interface
+- Refactored into 3 strategy objects + a lookup-based dispatcher, eliminating per-method conditional logic from the main function
+- Deliberately preserved two pre-existing quirks (a string return for unavailable overnight destinations, and a "0.00" fallback for unrecognized methods) rather than silently fixing them mid-refactor
+- Built a comparison harness: 18 test cases, checking both value AND type equality - all identical between original and refactored versions
+- Reflection on distinguishing behavior-preserving refactoring from bug-fixing, and not mixing the two
 ---
 
 ## Still to Come
