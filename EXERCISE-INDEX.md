@@ -112,7 +112,23 @@ Covers:
 - Empirically confirmed the bug (input-dependent hang, verified via `timeout` + exit code) before trusting any fix
 - Applied all three verification techniques: Collaborative Verification, Alternative Approaches, Developing a Critical Eye
 - Final fix tested against 8 cases including a 100,000-element stress test
-- Key insight: the bug didn't manifest on all inputs, only when `right` exhausts before `left` - easy to miss with a narrow test suite
+- Key insight: the bug didn't manifest on all inputs, only when `right` exhausts before `left` -
+easy to miss with a narrow test suite
+
+### 10. Using AI to Help with Testing
+**Location:** `use-cases/ai-assisted-testing-exercise/`
+**Journal:** [testing-exercise-journal.md](use-cases/ai-assisted-testing-exercise/testing-exercise-journal.md)
+
+All parts complete (1.1 through 4.1) - guided-questioning approach throughout,
+not AI-generated tests.
+
+Covers:
+- 1.1/1.2: Behavior analysis and test planning for calculate_task_score, sort_tasks_by_importance, get_top_priority_tasks
+- 2.1/2.2: Improved a weak assertion into a precise one; boundary testing uncovered a REAL, previously undiscovered bug - timedelta.days floors negative deltas, so "due today" tasks can silently score as overdue depending on microsecond timing
+- 3.1: Full TDD cycle (red/green/refactor-safety-check) for a new assignee-boost feature - discovered the Task model had no assignee concept at all before writing any test
+- 3.2: Investigated a described bug that didn't apply to this Python implementation; found the real timedelta quirk from 2.2 also exists here but doesn't change the outcome
+- 4.1: Integration tests confirming the full scoring→sorting→top-N workflow, including a DONE/URGENT task correctly losing to active tasks
+- 18 tests total, all passing, zero regressions
 ---
 
 ## Still to Come
