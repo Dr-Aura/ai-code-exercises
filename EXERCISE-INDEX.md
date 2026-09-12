@@ -101,6 +101,18 @@ Covers:
 - Fix: restructured the loop to generate each pair once, eliminating the dedup check entirely
 - Real measured results: ~1,015x speedup at n=500 (25.78s → 0.025s); original did not complete at n=1,000 within 250s, optimized handled the full n=5,000 target in 6.28s
 - Correctness verified: identical output before and after
+
+### 9. AI Solution Verification Challenge
+**Location:** `use-cases/ai-solution-verification-challenge/`
+**Journal:** [verification-challenge-journal.md](use-cases/ai-solution-verification-challenge/verification-challenge-journal.md)
+
+Problem chosen: Buggy merge sort (JavaScript) - infinite loop from a mis-incremented counter
+
+Covers:
+- Empirically confirmed the bug (input-dependent hang, verified via `timeout` + exit code) before trusting any fix
+- Applied all three verification techniques: Collaborative Verification, Alternative Approaches, Developing a Critical Eye
+- Final fix tested against 8 cases including a 100,000-element stress test
+- Key insight: the bug didn't manifest on all inputs, only when `right` exhausts before `left` - easy to miss with a narrow test suite
 ---
 
 ## Still to Come
