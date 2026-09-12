@@ -154,6 +154,19 @@ Covers:
 - Built a real comparison test harness: ran 31 diverse inputs through BOTH original and refactored versions, comparing outputs exactly (including crash-for-crash)
 - All 31 identical - refactoring verified to preserve behavior exactly
 - MAJOR FINDING: a real, previously-hidden crash bug in the original code - profile updates with a non-empty address object crash the function, because a generic field-required loop assumes all fields are strings while address is documented elsewhere as an object
+
+### 13. Code Readability Challenge
+**Location:** `use-cases/code-readability-challenge/`
+**Journal:** [readability-challenge-journal.md](use-cases/code-readability-challenge/readability-challenge-journal.md)
+
+Example chosen: Cryptic Variable Names (JavaScript) - inventory processing function
+
+Covers:
+- Ran original unit tests first to understand behavior before renaming anything
+- Renamed function, parameters, internal variables, and the return object's own keys for clarity
+- Deliberately kept loop counters unrenamed (used purely as indices) - clarity has a ceiling
+- Adapted and re-ran the test suite against the refactored version - all 3 tests passed, confirming behavior preservation
+- Reflection on which renames matter most (return-value keys, since they're the actual public contract)
 ---
 
 ## Still to Come
