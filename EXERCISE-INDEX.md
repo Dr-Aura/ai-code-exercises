@@ -90,8 +90,17 @@ Covers:
 - Fix and initialization guard
 - Reflection on JS scoping concepts (function-level shadowing)
 
-cd ~/Desktop/ai-code-exercises
-code EXERCISE-INDEX.md
+### 8. Performance Optimization Challenge
+**Location:** `use-cases/performance-optimization-challenge/`
+**Journal:** [performance-optimization-journal.md](use-cases/performance-optimization-challenge/performance-optimization-journal.md)
+
+Scenario chosen: Slow Code Analysis (Python) - find_product_combinations()
+
+Covers:
+- Profiled with cProfile to find the real bottleneck: an O(matches²) duplicate-check, not the O(n²) loop it appeared to be at first read
+- Fix: restructured the loop to generate each pair once, eliminating the dedup check entirely
+- Real measured results: ~1,015x speedup at n=500 (25.78s → 0.025s); original did not complete at n=1,000 within 250s, optimized handled the full n=5,000 target in 6.28s
+- Correctness verified: identical output before and after
 ---
 
 ## Still to Come
