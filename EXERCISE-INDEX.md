@@ -142,6 +142,18 @@ Covers:
 - Python process_orders: decomposed into 3 focused functions; surfaced an implicit, undocumented "free shipping over $50" business rule
 - JavaScript calculateUserStatistics: consolidated 6 near-identical loops into 2 generic helpers + a data-driven loop
 - Reflection on when to disagree with AI suggestions (readability vs. team experience level trade-offs) and safeguards before applying refactors to production code
+
+### 12. Function Decomposition Challenge
+**Location:** `use-cases/function-decomposition-challenge/`
+**Journal:** [decomposition-challenge-journal.md](use-cases/function-decomposition-challenge/decomposition-challenge-journal.md)
+
+Function chosen: validateUserData (JavaScript, 150+ lines, 9 responsibilities)
+
+Covers:
+- Decomposed into 10 focused helper functions; main function reduced to pure orchestration
+- Built a real comparison test harness: ran 31 diverse inputs through BOTH original and refactored versions, comparing outputs exactly (including crash-for-crash)
+- All 31 identical - refactoring verified to preserve behavior exactly
+- MAJOR FINDING: a real, previously-hidden crash bug in the original code - profile updates with a non-empty address object crash the function, because a generic field-required loop assumes all fields are strings while address is documented elsewhere as an object
 ---
 
 ## Still to Come
