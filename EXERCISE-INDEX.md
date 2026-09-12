@@ -89,6 +89,9 @@ Covers:
 - Root cause tracing: distinguished the crash's proximate cause (displayTasks running before initialization) from the actual logic bug (let shadowing preventing real task additions)
 - Fix and initialization guard
 - Reflection on JS scoping concepts (function-level shadowing)
+
+cd ~/Desktop/ai-code-exercises
+code EXERCISE-INDEX.md
 ---
 
 ## Still to Come
