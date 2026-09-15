@@ -180,6 +180,18 @@ Covers:
 - Deliberately preserved two pre-existing quirks (a string return for unavailable overnight destinations, and a "0.00" fallback for unrecognized methods) rather than silently fixing them mid-refactor
 - Built a comparison harness: 18 test cases, checking both value AND type equality - all identical between original and refactored versions
 - Reflection on distinguishing behavior-preserving refactoring from bug-fixing, and not mixing the two
+
+### 15. Deepening Knowledge of Your Current Programming Language
+**Location:** `use-cases/deepen-language-knowledge-exercise/`
+**Journal:** [language-deepening-journal.md](use-cases/deepen-language-knowledge-exercise/language-deepening-journal.md)
+
+Language: Python - all 3 activities complete
+
+Covers:
+- Activity 1 (Idiomatic Code): 21 lines -> 6 lines using enumerate/comprehension/sorted; verified against 5 cases including a tie-order edge case
+- Activity 2 (Code Quality Detective): identified 6 real code smells including a mutable default argument - EMPIRICALLY DEMONSTRATED with an isolated reproduction, not just described; built a reusable review checklist
+- Activity 3 (Language Feature - Decorators): implemented and tested a @retry decorator; confirmed functools.wraps preserves function metadata by checking __name__ directly
+- Cross-activity theme: understanding solidified through empirical demonstration, not just explanation, in all three activities
 ---
 
 ## Still to Come
