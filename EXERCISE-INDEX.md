@@ -192,6 +192,19 @@ Covers:
 - Activity 2 (Code Quality Detective): identified 6 real code smells including a mutable default argument - EMPIRICALLY DEMONSTRATED with an isolated reproduction, not just described; built a reusable review checklist
 - Activity 3 (Language Feature - Decorators): implemented and tested a @retry decorator; confirmed functools.wraps preserves function metadata by checking __name__ directly
 - Cross-activity theme: understanding solidified through empirical demonstration, not just explanation, in all three activities
+
+### 16. Learning a New Programming Language with AI
+**Location:** `use-cases/learning-new-language-exercise/`
+**Journal:** [learning-r-journal.md](use-cases/learning-new-language-exercise/learning-r-journal.md)
+
+Target language: R, coming from Python - all 4 parts complete
+
+Covers:
+- 4-phase learning journey plan (Fundamentals -> Data Frames -> Statistics -> Visualization)
+- Four-step prompting strategy applied to vectors/vectorization, with REAL R code run throughout (not just described)
+- GENUINE BUG FOUND: 1:length(x) on an empty vector produces "1 0" in R (counts down), meaning a Python-habit loop runs twice on empty input instead of zero times - confirmed empirically
+- 2 advanced prompting techniques practiced (Context Effectively, Learning Through Teaching) with claims verified via actual code, not taken on faith
+- Mini-project: full data summary + stats + visualization script, run end-to-end with a real saved plot
 ---
 
 ## Still to Come
