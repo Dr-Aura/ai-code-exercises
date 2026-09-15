@@ -205,6 +205,19 @@ Covers:
 - GENUINE BUG FOUND: 1:length(x) on an empty vector produces "1 0" in R (counts down), meaning a Python-habit loop runs twice on empty input instead of zero times - confirmed empirically
 - 2 advanced prompting techniques practiced (Context Effectively, Learning Through Teaching) with claims verified via actual code, not taken on faith
 - Mini-project: full data summary + stats + visualization script, run end-to-end with a real saved plot
+
+### 17. Getting Started with FastAPI
+**Location:** `use-cases/fastapi-getting-started-exercise/`
+**Journal:** [fastapi-getting-started-journal.md](use-cases/fastapi-getting-started-exercise/fastapi-getting-started-journal.md)
+
+All 4 parts complete, with real running code tested via FastAPI's TestClient
+(not just described)
+
+Covers:
+- Part 2: basic API built and tested (5 requests) - including automatic 422 validation demonstrating FastAPI's core type-hints-as-validation advantage
+- Part 3: TWO real, verified deprecation bugs found in the EXERCISE'S OWN sample code (Pydantic V1 `class Config` syntax, and `HTTP_422_UNPROCESSABLE_ENTITY`) - both confirmed with actual Python tracebacks, both fixed and re-verified
+- Part 4: full To-Do List CRUD API built and tested (9 requests) - create, list, filter by completion status, complete, delete, 404 handling, validation
+- Direct validation of this chapter's own core warning: AI/tutorial-provided code can already be outdated - always cross-reference against the actual installed version
 ---
 
 ## Still to Come
