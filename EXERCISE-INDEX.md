@@ -230,7 +230,19 @@ Covers:
 - Part 2: design philosophy summary (Pydantic choice, automatic docs, type hints, async-first)
 - Part 3: full JWT auth flow built and tested end-to-end (5 requests) - found 2 MORE real issues: a missing dependency (python-multipart) in the exercise's own install command, and a well-known ecosystem-wide passlib/bcrypt 4.1+ incompatibility, both diagnosed and fixed with verified results
 - Part 4: mental model translation table (Django views/models/middleware/admin -> FastAPI equivalents, including real gaps with no equivalent)
-- Cross-exercise theme: 2nd FastAPI exercise in a row surfacing real, verified dependency/version issues in provided sample code
+- Cross-exercise theme: 2nd FastAPI exercise in a row surfacing real, verified dependency/version issues in provided sample code.
+
+### 19. Documentation Navigation for FastAPI
+**Location:** `use-cases/fastapi-documentation-navigation-exercise/`
+**Journal:** [fastapi-documentation-navigation-journal.md](use-cases/fastapi-documentation-navigation-exercise/fastapi-documentation-navigation-journal.md)
+
+All 4 parts complete
+
+Covers:
+- Part 1-2: reading roadmap and Depends() deep dive
+- Part 3: all 5 documentation concepts (DI, validation, background tasks, path params, exception handling) built and tested (9 requests) - found the SAME Pydantic V1 Config bug for a 3rd time across this course's exercises, plus a 4th unique missing dependency (email-validator)
+- Part 4: full mini blog API (auth, CRUD posts, comments, search) built and tested end-to-end (13 requests) - all passed
+- Meta-lesson: recurring deprecated pattern across course material, not isolated incidents - recognizing it once made every later occurrence faster to catch.
 ---
 
 ## Still to Come
