@@ -218,6 +218,19 @@ Covers:
 - Part 3: TWO real, verified deprecation bugs found in the EXERCISE'S OWN sample code (Pydantic V1 `class Config` syntax, and `HTTP_422_UNPROCESSABLE_ENTITY`) - both confirmed with actual Python tracebacks, both fixed and re-verified
 - Part 4: full To-Do List CRUD API built and tested (9 requests) - create, list, filter by completion status, complete, delete, 404 handling, validation
 - Direct validation of this chapter's own core warning: AI/tutorial-provided code can already be outdated - always cross-reference against the actual installed version
+
+### 18. Contextual Learning with FastAPI
+**Location:** `use-cases/fastapi-contextual-learning-exercise/`
+**Journal:** [fastapi-contextual-learning-journal.md](use-cases/fastapi-contextual-learning-exercise/fastapi-contextual-learning-journal.md)
+
+All 4 parts complete
+
+Covers:
+- Part 1: Flask/Django -> FastAPI translation table
+- Part 2: design philosophy summary (Pydantic choice, automatic docs, type hints, async-first)
+- Part 3: full JWT auth flow built and tested end-to-end (5 requests) - found 2 MORE real issues: a missing dependency (python-multipart) in the exercise's own install command, and a well-known ecosystem-wide passlib/bcrypt 4.1+ incompatibility, both diagnosed and fixed with verified results
+- Part 4: mental model translation table (Django views/models/middleware/admin -> FastAPI equivalents, including real gaps with no equivalent)
+- Cross-exercise theme: 2nd FastAPI exercise in a row surfacing real, verified dependency/version issues in provided sample code
 ---
 
 ## Still to Come
