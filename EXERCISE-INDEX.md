@@ -243,7 +243,21 @@ Covers:
 - Part 3: all 5 documentation concepts (DI, validation, background tasks, path params, exception handling) built and tested (9 requests) - found the SAME Pydantic V1 Config bug for a 3rd time across this course's exercises, plus a 4th unique missing dependency (email-validator)
 - Part 4: full mini blog API (auth, CRUD posts, comments, search) built and tested end-to-end (13 requests) - all passed
 - Meta-lesson: recurring deprecated pattern across course material, not isolated incidents - recognizing it once made every later occurrence faster to catch.
+
+### 20. Understanding FastAPI Code Patterns
+**Location:** `use-cases/fastapi-code-patterns-exercise/`
+**Journal:** [fastapi-code-patterns-journal.md](use-cases/fastapi-code-patterns-exercise/fastapi-code-patterns-journal.md)
+
+All 4 parts complete
+
+Covers:
+- 4th occurrence of outdated Pydantic V1 syntax found across this course's material (orm_mode -> from_attributes rename this time)
+- Part 1-2: analyzed Repository/Generic/DI patterns, then EMPIRICALLY VERIFIED two real questions from tracing execution flow - confirmed the decorator+Depends stacking pattern works correctly, and discovered FastAPI caches Depends() results per-request (a dependency referenced twice is only executed once)
+- Part 3: simplified lifespan, middleware, and JWT flow
+- Part 4: built a full audit-logging feature extending the existing Repository/Service/DI patterns, tested end-to-end (5 requests) - including verifying a non-admin's blocked attempt is correctly NOT audited, confirming decorator execution order
 ---
 
-## Still to Come
-_(future exercises will be added here as they're completed)_
+## Status: Complete
+
+All 20 exercises for the "Coding & Learning: Using GenAI to Support Software
+Development" course are complete as of this entry.
